@@ -2,7 +2,8 @@ import axios from "axios";
 import { getAccessToken } from "./auth";
 import { getOneMatkul } from "./matkuls";
 
-const BASE_URL = "http://localhost:8000/api/users";
+// const BASE_URL = "http://localhost:8000/api/users";
+const BASE_URL = "https://forum-diskusiback-end-production.up.railway.app/api/users";
 
 const getBasicUserInfo = async (id) => {
   try {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiFillLike, AiFillDislike, AiFillEdit } from "react-icons/ai";
 import "../../../styles/components/diskusiComment.css";
 import { DiskusiCardHeader } from "./DiskusiCardHeader";
-import { getBasicUserInfo, getUserProfile } from "../../../scripts/api/users";
+import { getBasicUserInfo } from "../../../scripts/api/users";
 import {
   checkIfUserDislikeComment,
   checkIfUserLikeComment,
@@ -17,6 +17,8 @@ import {
 import { BsFillTrashFill } from "react-icons/bs";
 import DeleteModal from "../modal/DeleteModal";
 import { toast } from "react-toastify";
+import { getDataFromToken } from "../../../scripts/api/auth";
+import Skeleton from "react-loading-skeleton";
 
 const DiskusiComment = ({
   id,
@@ -30,7 +32,7 @@ const DiskusiComment = ({
   id_role,
 }) => {
   const [userName, setUserName] = useState();
-  const [userId, setUserId] = useState(getUserProfile());
+  const [userId, setUserId] = useState(getDataFromToken());
   const [commentDesc, setCommentDesc] = useState(comment_description);
   const [commentLikes, setCommentLikes] = useState(0);
   const [commentDislikes, setCommentDislikes] = useState(0);
@@ -39,12 +41,14 @@ const DiskusiComment = ({
   const [userImageUrl, setUserImageUrl] = useState();
   const [editMode, setEditMode] = useState(false);
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const getData = async () => {
       const user = await getBasicUserInfo(id_user);
       setUserName(user.user_name);
@@ -53,8 +57,10 @@ const DiskusiComment = ({
       const userLike = await checkIfUserLikeComment(id);
       setIsUserLike(userLike);
 
-      const userId = await getUserProfile();
+      const userId = getDataFromToken();
       setUserId(userId.id);
+
+      setIsLoading(false);
     };
     getData();
 
@@ -165,84 +171,90 @@ const DiskusiComment = ({
   return (
     <>
       <div className="diskusi-detail_comment-user">
-        <DiskusiCardHeader
-          user_name={userName}
-          user_imageUrl={userImageUrl}
-          createdAt={createdAt}
-        />
-        <div className="diskusi-card_content">
-          {editMode === true ? (
-            <>
-              <textarea
-                onChange={handleOnChangeEdit}
-                defaultValue={commentDesc}
-                className="edit-comment-area"
-                required
-              />
-              <div className="diskusi-edit_btn-group">
-                <button
-                  className="btn btn-danger btn-edit-diskusi-cancel"
-                  onClick={() => setEditMode(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="btn btn-success btn-submit-edit"
-                  onClick={handleOnClickEditSubmit}
-                >
-                  Edit
-                </button>
+        {isLoading ? (
+          <Skeleton count={3} />
+        ) : (
+          <>
+            <DiskusiCardHeader
+              user_name={userName}
+              user_imageUrl={userImageUrl}
+              createdAt={createdAt}
+            />
+            <div className="diskusi-card_content">
+              {editMode === true ? (
+                <>
+                  <textarea
+                    onChange={handleOnChangeEdit}
+                    defaultValue={commentDesc}
+                    className="edit-comment-area"
+                    required
+                  />
+                  <div className="diskusi-edit_btn-group">
+                    <button
+                      className="btn btn-danger btn-edit-diskusi-cancel"
+                      onClick={() => setEditMode(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="btn btn-success btn-submit-edit"
+                      onClick={handleOnClickEditSubmit}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p>{commentDesc}</p>
+              )}
+            </div>
+
+            {/* Show Modal delete confirmation */}
+            <DeleteModal
+              show={show}
+              handleClose={handleClose}
+              handler={handleOnClickDelete}
+              title={"Komentar"}
+              description={"komentar"}
+            />
+
+            <div className="diskusi-card_footer diskusi-card_footer-mobile">
+              <div className="diskusi-card_icon-group">
+                {isUserLike === true ? (
+                  <button className="btn-like-true" onClick={handleOnClickUnlike}>
+                    <AiFillLike />
+                  </button>
+                ) : (
+                  <button
+                    className="btn-like-false"
+                    onClick={handleOnClickLike}
+                    disabled={isUserDislike}
+                  >
+                    <AiFillLike />
+                  </button>
+                )}
+                <p>{commentLikes}</p>
               </div>
-            </>
-          ) : (
-            <p>{commentDesc}</p>
-          )}
-        </div>
-
-        {/* Show Modal delete confirmation */}
-        <DeleteModal
-          show={show}
-          handleClose={handleClose}
-          handler={handleOnClickDelete}
-          title={"Komentar"}
-          description={"komentar"}
-        />
-
-        <div className="diskusi-card_footer diskusi-card_footer-mobile">
-          <div className="diskusi-card_icon-group">
-            {isUserLike === true ? (
-              <button className="btn-like-true" onClick={handleOnClickUnlike}>
-                <AiFillLike />
-              </button>
-            ) : (
-              <button
-                className="btn-like-false"
-                onClick={handleOnClickLike}
-                disabled={isUserDislike}
-              >
-                <AiFillLike />
-              </button>
-            )}
-            <p>{commentLikes}</p>
-          </div>
-          <div className="diskusi-card_icon-group">
-            {isUserDislike === true ? (
-              <button className="btn-dislike-true" onClick={handleOnClickUndislike}>
-                <AiFillDislike />
-              </button>
-            ) : (
-              <button
-                className="btn-dislike-false"
-                onClick={handleOnClickDislike}
-                disabled={isUserLike}
-              >
-                <AiFillDislike />
-              </button>
-            )}
-            <p>{commentDislikes}</p>
-          </div>
-          {showAction}
-        </div>
+              <div className="diskusi-card_icon-group">
+                {isUserDislike === true ? (
+                  <button className="btn-dislike-true" onClick={handleOnClickUndislike}>
+                    <AiFillDislike />
+                  </button>
+                ) : (
+                  <button
+                    className="btn-dislike-false"
+                    onClick={handleOnClickDislike}
+                    disabled={isUserLike}
+                  >
+                    <AiFillDislike />
+                  </button>
+                )}
+                <p>{commentDislikes}</p>
+              </div>
+              {showAction}
+            </div>
+          </>
+        )}
       </div>
       <hr />
     </>

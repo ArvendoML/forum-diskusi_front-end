@@ -6,6 +6,7 @@ import Main from "./layout/Main";
 import { isTokenValid } from "../scripts/api/auth";
 import "../styles/components/form.css";
 import "react-toastify/dist/ReactToastify.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer } from "react-toastify";
 
 const AppMain = () => {

@@ -10,9 +10,9 @@ import MatkulDiskusiDetailPage from "../pages/MatkulDiskusiDetailPage";
 import ProfilePage from "../pages/ProfilePage";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getUserProfile } from "../../scripts/api/users";
 import { UserProfileProvider } from "../../context/userProfile.context";
 import AdminManager from "../pages/AdminManager";
+import { getUserProfile } from "../../scripts/api/users";
 
 const Main = ({ setUserAuth }) => {
   const [userProfile, setUserProfile] = useState();

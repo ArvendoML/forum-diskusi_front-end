@@ -5,6 +5,10 @@
     gap: 20px;
 }
 
+.diskusi-detail_comment-user .diskusi-card_header {
+    margin-bottom: 0;
+}
+
 .edit-comment-area {
     border: 1px solid #ced4da;
     border-radius: 10px;
@@ -16,4 +20,9 @@
     width: 80px;
     padding: 4px;
     align-self: end;
+}
+
+.comment-skeleton {
+    background-color: lightgray;
+
 }

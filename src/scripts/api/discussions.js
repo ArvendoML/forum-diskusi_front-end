@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getAccessToken } from "./auth";
 
-const BASE_URL = "http://localhost:8000/api/discussions";
+// const BASE_URL = "http://localhost:8000/api/discussions";
+const BASE_URL = "https://forum-diskusiback-end-production.up.railway.app/api/discussions";
 
 const getDiscussionList = async (id) => {
   try {

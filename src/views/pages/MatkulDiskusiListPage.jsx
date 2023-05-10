@@ -16,6 +16,7 @@ const MatkulDiskusiListPage = () => {
   const [matkul, setMatkul] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Search
   const searchKeywordParam = searchParams.get("search") || "";
@@ -40,12 +41,14 @@ const MatkulDiskusiListPage = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const getData = async () => {
       const diskusi = await getDiscussionList(id_matkul);
       const matkul = await getOneMatkul(id_matkul);
 
       setDiscussionsList(diskusi);
       setMatkul(matkul);
+      setIsLoading(false);
     };
 
     getData();
@@ -64,6 +67,10 @@ const MatkulDiskusiListPage = () => {
       </>
     );
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <section id="matkulDiskusiListPage">

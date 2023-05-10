@@ -4,7 +4,7 @@ import { GoReply } from "react-icons/go";
 import DiskusiComment from "../components/discussion/DiskusiComment";
 import { getOneMatkul } from "../../scripts/api/matkuls";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBasicUserInfo, getUserProfile } from "../../scripts/api/users";
+import { getBasicUserInfo } from "../../scripts/api/users";
 import {
   deleteDiscussion,
   editDiscussion,
@@ -19,13 +19,13 @@ import { Input } from "../components/FormInput";
 import Paginate from "../components/paginate/Paginate";
 import DeleteModal from "../components/modal/DeleteModal";
 import "../../styles/pages/matkulDiskusiDetailPage.css";
-import { UserProfileConsumer } from "../../context/userProfile.context";
 import {
   DiskusiCardHeader,
   DiskusiCardHeaderNewComment,
 } from "../components/discussion/DiskusiCardHeader";
 import DiskusiImages from "../components/discussion/DiskusiImages";
 import EditDiskusiImages from "../components/discussion/EditDiskusiImages";
+import { getDataFromToken } from "../../scripts/api/auth";
 
 const MatkulDiskusiDetailPage = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const MatkulDiskusiDetailPage = () => {
   const [userName, setUserName] = useState();
   const [userProfileImage, setUserProfileImage] = useState();
   const [commentValue, setCommentValue] = useState();
-  const [user, setUser] = useState(getUserProfile());
+  const [user, setUser] = useState(getDataFromToken());
   const [editMode, setEditMode] = useState(false);
   const [discussionTitle, setDiscussionTitle] = useState();
   const [discussionDesc, setDiscussionDesc] = useState();
@@ -66,22 +66,13 @@ const MatkulDiskusiDetailPage = () => {
       setUserName(user.user_name);
       setUserProfileImage(user.user_imageUrl);
 
+      const userData = getDataFromToken();
+      setUser(userData);
+
       setIsLoading(false);
     };
     getData();
   }, [id_matkul, id_discussion]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const getUserInfo = async () => {
-      const user = await getUserProfile();
-
-      setUser(user);
-      setIsLoading(false);
-    };
-
-    getUserInfo();
-  }, [id_matkul]);
 
   // Handle Create Comment
   const handleOnChangeComment = (event) => {
@@ -287,34 +278,28 @@ const MatkulDiskusiDetailPage = () => {
       />
 
       {/* Create New Comment */}
-      <UserProfileConsumer>
-        {({ userProfile }) => {
-          return (
-            <section className="diskusi-detail_comment-new">
-              <DiskusiCardHeaderNewComment {...userProfile} />
-              <textarea
-                id="replyInput"
-                placeholder="Balas disini..."
-                onChange={handleOnChangeComment}
-                required
-              />
-              <div className="diskusi-detail_comment-new-btn">
-                <button
-                  className="btn"
-                  onClick={handleOnClickCommentSubmit}
-                  disabled={
-                    commentValue === "" || commentValue === null || commentValue === undefined
-                      ? true
-                      : false
-                  }
-                >
-                  Balas
-                </button>
-              </div>
-            </section>
-          );
-        }}
-      </UserProfileConsumer>
+      <section className="diskusi-detail_comment-new">
+        <DiskusiCardHeaderNewComment user_name={userName} user_imageUrl={userProfileImage} />
+        <textarea
+          id="replyInput"
+          placeholder="Balas disini..."
+          onChange={handleOnChangeComment}
+          required
+        />
+        <div className="diskusi-detail_comment-new-btn">
+          <button
+            className="btn"
+            onClick={handleOnClickCommentSubmit}
+            disabled={
+              commentValue === "" || commentValue === null || commentValue === undefined
+                ? true
+                : false
+            }
+          >
+            Balas
+          </button>
+        </div>
+      </section>
 
       {/* Show Comment */}
       <section className="diskusi-detail_comment-list">

@@ -2,7 +2,8 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
 
-const BASE_URL = "http://localhost:8000/api/auth";
+// const BASE_URL = "http://localhost:8000/api/auth";
+const BASE_URL = "https://forum-diskusiback-end-production.up.railway.app/api/auth";
 
 const getAccessToken = () => {
   return localStorage.getItem("accessToken");
@@ -14,6 +15,12 @@ const putAccessToken = (accessToken) => {
 
 const removeAccessToken = () => {
   return localStorage.removeItem("accessToken");
+};
+
+const getDataFromToken = () => {
+  const token = jwtDecode(getAccessToken());
+
+  return token;
 };
 
 const isTokenValid = () => {
@@ -74,4 +81,12 @@ const userRegister = async (name, nim, email, password) => {
   }
 };
 
-export { getAccessToken, putAccessToken, removeAccessToken, userLogin, userRegister, isTokenValid };
+export {
+  getAccessToken,
+  putAccessToken,
+  removeAccessToken,
+  getDataFromToken,
+  userLogin,
+  userRegister,
+  isTokenValid,
+};

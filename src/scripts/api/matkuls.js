@@ -2,7 +2,8 @@ import axios from "axios";
 import { getAccessToken } from "./auth";
 import { toast } from "react-toastify";
 
-const BASE_URL = "http://localhost:8000/api/matkul";
+// const BASE_URL = "http://localhost:8000/api/matkul";
+const BASE_URL = "https://forum-diskusiback-end-production.up.railway.app/api/matkul";
 
 const getMatkulList = async () => {
   try {
