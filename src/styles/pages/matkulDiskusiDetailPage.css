@@ -1,0 +1,125 @@
+#matkulDiskusiDetailPage {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#matkulDiskusiListPage .pagination {
+    padding-inline: 0;
+    margin: 0;
+}
+
+.diskusi-card_content input,
+.diskusi-card_content textarea {
+    border: 1px solid #ced4da !important;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.diskusi-card_content textarea {
+    height: 80px;
+}
+
+.diskusi-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.diskusi-edit_btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.btn-edit-diskusi,
+.btn-edit-diskusi-cancel {
+    color: white;
+    padding: 5px;
+    padding-inline: 30px;
+    border: transparent;
+    border-radius: 5px;
+    align-self: flex-end;
+}
+
+.diskusi-card_icon-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-reply:hover {
+    color: var(--main-color-hover);
+}
+
+.btn-edit:hover {
+    color: green;
+}
+
+.btn-delete:hover {
+    color: red;
+}
+
+.diskusi-detail_comment-new {
+    padding: 15px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.diskusi-detail_comment-new textarea {
+    min-height: 100px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.diskusi-detail_comment-new-btn {
+    text-align: right;
+}
+
+.diskusi-detail_comment-new button,
+.diskusi-detail_comment-new button:disabled {
+    color: white;
+    width: 100px;
+    background-color: var(--main-color);
+}
+
+.diskusi-detail_comment-new button:hover {
+    background-color: var(--main-color-hover);
+}
+
+#matkulDiskusiDetailPage .diskusi-card_footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+#matkulDiskusiDetailPage .diskusi-card_footer button {
+    background-color: transparent;
+    border: transparent;
+}
+
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-like-false,
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-dislike-false {
+    color: black;
+}
+
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-like-true,
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-like-false:hover {
+    color: green;
+}
+
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-dislike-true,
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-dislike-false:hover {
+    color: red;
+}
+
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-like-false:disabled:hover,
+#matkulDiskusiDetailPage .diskusi-card_footer .btn-dislike-false:disabled:hover {
+    color: inherit;
+}

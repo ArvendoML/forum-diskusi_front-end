@@ -1,0 +1,152 @@
+@media (max-width: 1024px) {
+    .admin-manager_header button {
+        width: 35% !important;
+    }
+
+    .matkul-card {
+        width: 50% !important;
+    }
+
+    .matkul-list-page-header_select {
+        width: 25% !important;
+    }
+
+    .btn-create-discussion {
+        width: 25% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --left-margin: 220px !important;
+    }
+
+    .admin-manager_header button {
+        width: 55% !important;
+    }
+
+    .matkul-list-page-header_select {
+        width: 30% !important;
+    }
+
+    .btn-create-discussion {
+        font-size: 17px;
+        width: 30% !important;
+    }
+
+    #diskusiImagesCarousel {
+        margin-block: 0 !important;
+    }
+}
+
+@media (max-width: 426px) {
+
+    #loginPage,
+    #registerPage {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .matkul-list-page-header {
+        flex-direction: column !important;
+    }
+
+    .matkul-list-page-header_select {
+        padding: 0 !important;
+        padding-inline: 15px !important;
+        width: 100% !important;
+    }
+
+    .loginPage_left,
+    .registerPage_left {
+        display: none !important;
+    }
+
+    .loginPage_right,
+    .registerPage_right {
+        height: 100% !important;
+    }
+
+    .register-password-input {
+        flex-direction: column;
+    }
+
+    #aside {
+        display: none !important;
+    }
+
+    #mainContent {
+        margin-left: 0 !important;
+    }
+
+    #dropdownMobile {
+        display: block !important;
+    }
+
+    .matkul-card {
+        width: 100% !important;
+    }
+
+    .header-user p {
+        display: none !important;
+    }
+
+    .diskusi-header-group {
+        gap: 10px !important;
+    }
+
+    .btn-create-discussion {
+        font-size: 15px !important;
+        padding: 5px !important;
+    }
+
+    .diskusi-card_footer {
+        display: grid !important;
+        grid-template-columns: auto auto;
+    }
+
+    .diskusi-card_footer-mobile {
+        display: flex !important;
+    }
+
+    .admin-manager_matkul-list table {
+        overflow-x: clip !important;
+        min-width: 600px !important;
+    }
+
+    .admin-manager_header {
+        flex-direction: column !important;
+    }
+
+    .admin-manager_header button {
+        padding-block: 10px !important;
+        width: 60% !important;
+    }
+}
+
+@media (max-width: 321px) {
+    #matkulDiskusiDetailPage {
+        padding: 15px !important;
+    }
+
+    #matkulDiskusiListPage {
+        padding: 15px !important;
+    }
+
+    #mainContent {
+        padding: 5px !important;
+    }
+
+    .form-input-with-icon input {
+        height: 100% !important;
+    }
+
+    .card-hover .diskusi-card_footer {
+        display: flex !important;
+    }
+
+    .diskusi-card_footer-mobile {
+        display: grid !important;
+        grid-template-columns: auto auto;
+    }
+}

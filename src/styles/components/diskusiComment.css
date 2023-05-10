@@ -1,0 +1,19 @@
+.diskusi-detail_comment-user {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.edit-comment-area {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.btn-submit-edit {
+    width: 80px;
+    padding: 4px;
+    align-self: end;
+}

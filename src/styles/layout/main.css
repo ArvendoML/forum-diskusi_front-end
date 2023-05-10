@@ -1,0 +1,37 @@
+#mainContent {
+    margin-left: var(--left-margin);
+    padding: 15px;
+    padding-top: 25px;
+}
+
+#mainContent .card-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-hover {
+    transition: all .2s ease-in-out;
+}
+
+.card-hover:hover {
+    transform: scale(1.02);
+}
+
+.diskusi-header_top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.diskusi-header_top h1 {
+    margin: 0;
+}
+
+.navigate-back {
+    background-color: transparent;
+    border: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

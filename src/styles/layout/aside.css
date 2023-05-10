@@ -1,0 +1,33 @@
+#aside {
+    background-color: #205295;
+    box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    margin-top: var(--top-height);
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--left-margin);
+}
+
+#aside .aside_main {
+    display: flex;
+    flex-direction: column;
+}
+
+#aside .aside_main a {
+    color: white;
+    padding-inline: 20px;
+    padding-block: 15px;
+}
+
+#aside .aside_main a:hover {
+    background-color: var(--main-color);
+}
+
+#aside .aside_main a.active {
+    background-color: var(--main-color);
+}

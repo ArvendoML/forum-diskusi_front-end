@@ -1,0 +1,65 @@
+.matkul-card {
+    padding: 15px;
+    width: 25%;
+}
+
+.matkul-card-group {
+    height: 100%;
+}
+
+.matkul-card .card {
+    width: 100%;
+    height: 100%;
+    border: transparent;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.matkul-card .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.matkul-card .card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.matkul-card .card-body .card-title {
+    margin: 0;
+}
+
+.matkul-card .card-body hr {
+    margin-block: 10px;
+}
+
+.matkul-card .card-body .card-text {
+    font-size: 15px;
+}
+
+.matkul-card-group {
+    position: relative;
+}
+
+.matkul-card-action {
+    border-top-right-radius: 5px;
+    z-index: 50;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.matkul-card-action button {
+    background-color: transparent;
+    border: transparent;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.matkul-card-action button:hover {
+    transform: scale(1.1);
+
+}

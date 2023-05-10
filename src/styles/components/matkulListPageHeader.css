@@ -1,0 +1,18 @@
+.matkul-list-page-header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.matkul-list-page-header #searchBar {
+    width: 100%;
+}
+
+.matkul-list-page-header_select {
+    padding-block: 15px;
+    width: 15%;
+}
+
+.matkul-list-page-header_select .form-select {
+    height: 45px;
+}

@@ -1,0 +1,42 @@
+.dropdown #dropdown-basic {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-block: 20px;
+}
+
+.dropdown .dropdown-item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+#dropdownMobile {
+    display: none;
+    font-size: 17px;
+}
+
+#dropdownMobile hr {
+    margin: 5px;
+}
+
+.dropdownMobile-component {
+    padding-inline: 20px;
+}
+
+.dropdownMobile-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownMobile-nav a {
+    font-size: 17px !important;
+    padding: 5px;
+    padding-inline: 20px;
+}
+
+.dropdownMobile-nav .active {
+    background-color: var(--main-color);
+    color: white;
+}

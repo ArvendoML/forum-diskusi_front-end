@@ -1,0 +1,92 @@
+.admin-manager_header {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 15px;
+}
+
+.admin-manager_header #searchBar {
+    width: 100%;
+    padding: 0;
+}
+
+.admin-manager_header button {
+    width: 20%;
+    background-color: var(--main-color);
+    color: white;
+    border: transparent;
+    border-radius: var(--border-radius-corner);
+}
+
+.admin-manager_header button:hover {
+    background-color: var(--main-color-hover);
+}
+
+.admin-manager_matkul-list {
+    padding: 15px;
+}
+
+.admin-manager_matkul-list td {
+    height: 100%;
+}
+
+.admin-manager_matkul-list th:first-child,
+.admin-manager_matkul-list th:last-child,
+.admin-manager_matkul-list td:first-child,
+.admin-manager_matkul-list td:last-child {
+    text-align: center;
+}
+
+.admin-manager_table-action {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.admin-manager_table-action button {
+    background-color: transparent;
+    border: none;
+}
+
+.admin-manager_table-action .btn-edit {
+    color: green;
+}
+
+.admin-manager_table-action .btn-edit:hover {
+    color: rgb(0, 106, 0);
+}
+
+.admin-manager_table-action .btn-delete {
+    color: #dc3545;
+}
+
+.admin-manager_table-action .btn-delete:hover {
+    color: #b81929
+}
+
+.admin-manager_matkul-list a {
+    color: var(--main-color-hover);
+}
+
+.admin-manager_matkul-list a:hover {
+    color: #205295;
+}
+
+/* Modal */
+.modal-create-matkul {
+    z-index: 100000 !important;
+}
+
+.form-create-matkul .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-create-matkul .btn-submit-matkul {
+    background-color: var(--main-color);
+}
+
+.form-create-matkul .btn-submit-matkul:hover {
+    background-color: var(--main-color-hover);
+}

@@ -1,0 +1,58 @@
+.diskusi-create-modal {
+    z-index: 100000000 !important;
+}
+
+.diskusi-create-modal .modal-header {
+    padding: 10px;
+    padding-inline: 20px;
+}
+
+.diskusi-create-modal .btn-close {
+    margin: 0;
+}
+
+.diskusi-create-modal .modal-footer {
+    padding: 10px;
+    padding-inline: 15px;
+}
+
+.diskusi-create-modal .form-input {
+    gap: 5px;
+}
+
+.diskusi-create-modal label {
+    font-size: 20px;
+}
+
+.diskusi-create-modal input,
+.diskusi-create-modal textarea {
+    border: 1px solid #ced4da !important;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.diskusi-create-modal .diskusi-form-create_content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-size: 15px !important;
+}
+
+.diskusi-create-modal .btn-primary {
+    background-color: var(--main-color) !important;
+}
+
+.diskusi-create-modal .btn-submit-discussion:hover {
+    background-color: var(--main-color-hover) !important;
+}
+
+.diskusi-modal-add-image .diskusi-image-input input {
+    border: 1px solid #ced4da;
+}
+
+.diskusi-modal-add-image .form-insert-image {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

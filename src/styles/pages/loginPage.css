@@ -1,0 +1,33 @@
+#loginPage {
+    background-color: var(--main-color);
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    color: white
+}
+
+.loginPage_left {
+    height: 100%;
+}
+
+.loginPage_left img {
+    object-fit: cover;
+    object-position: 7% 100%;
+}
+
+/* Login Page Right Section */
+.loginPage_right {
+    background-color: white;
+    padding: 30px;
+    color: black;
+}
+
+.loginPage_right-logo {
+    width: 100%;
+    text-align: center;
+    margin-block: 50px;
+}
+
+.loginPage_right-logo img {
+    max-width: 200px;
+}

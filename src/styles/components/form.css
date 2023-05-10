@@ -1,0 +1,120 @@
+#formSection {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.form-insert-image {
+    margin-bottom: 10px;
+}
+
+.form-insert-image .carousel,
+.form-insert-image .carousel-item,
+.form-insert-image img {
+    height: 300px;
+}
+
+.form-insert-image img {
+    object-fit: contain;
+}
+
+.form-insert-image .carousel-item {
+    position: relative;
+    background-color: white;
+}
+
+.form-insert-image .btn-remove-image {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: transparent;
+}
+
+.form-insert-image .btn-remove-image:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.form-insert-image input {
+    border-radius: var(--border-radius-corner);
+    padding: 0 !important;
+    height: auto !important;
+}
+
+.form-insert-image input::-webkit-file-upload-button {
+    content: "File";
+    background-color: var(--main-color);
+    color: white;
+    border: transparent;
+    padding: 5px;
+}
+
+.form-insert-image input::-webkit-file-upload-button:hover {
+    background-color: var(--main-color-hover) !important;
+}
+
+.form-insert-image_input-group p {
+    font-size: 13px;
+}
+
+.form-input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.form-input-with-icon svg {
+    color: grey;
+    position: absolute;
+    right: 5px;
+}
+
+.form-input label {
+    font-weight: bold;
+}
+
+.form-input input {
+    height: 30px;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius-corner);
+    padding: 5px;
+    width: 100%;
+}
+
+.form-footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.btn-login,
+.btn-register {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    background-color: var(--main-color);
+}
+
+.btn-login:hover,
+.btn-register:hover {
+    background-color: var(--main-color-hover);
+    color: white !important;
+}
+
+.form-bottom-text,
+.form-bottom-text a {
+    font-size: 17px;
+}
+
+.form-bottom-text a {
+    color: #2C74B3;
+}

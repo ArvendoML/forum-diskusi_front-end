@@ -1,0 +1,39 @@
+#matkulDiskusiListPage {
+    padding: 15px;
+}
+
+.diskusi-header h1 {
+    font-size: 25px;
+}
+
+.diskusi-header-group {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.diskusi-header-group #searchBar {
+    width: 85%;
+    padding: 0;
+}
+
+.diskusi-header-group #searchBar .form-input-with-icon {
+    height: 100%;
+}
+
+.diskusi-header-group .btn-create-discussion {
+    width: 15%;
+    border: transparent;
+    background-color: var(--main-color);
+}
+
+.diskusi-header-group .btn-create-discussion:hover {
+    background-color: var(--main-color-hover);
+}
+
+.diskusi-list {
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}

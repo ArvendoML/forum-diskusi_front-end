@@ -1,0 +1,38 @@
+#registerPage {
+    background-color: navy;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    color: white
+}
+
+.registerPage_left {
+    height: 100%;
+}
+
+.registerPage_left img {
+    object-fit: cover;
+    object-position: 7% 100%;
+}
+
+/* Login Page Right Section */
+.registerPage_right {
+    background-color: white;
+    padding: 30px;
+    color: black;
+}
+
+.register-password-input {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.register-password-input-group {
+    width: 100%;
+    display: flex;
+}
+
+.registerPage_right .form-input input {
+    border: 1px solid #ced4da;
+}

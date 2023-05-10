@@ -1,0 +1,63 @@
+#diskusiImagesCarousel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-block: 20px;
+    gap: 10px;
+}
+
+#diskusiImagesCarousel .carousel,
+#diskusiImagesCarousel .carousel-item,
+#diskusiImagesCarousel img {
+    width: 100%;
+    max-height: 300px;
+}
+
+#diskusiImagesCarousel img {
+    object-fit: contain;
+}
+
+#diskusiImagesCarousel .carousel-item {
+    background-color: white;
+    position: relative;
+}
+
+#diskusiImagesCarousel .btn-remove-image {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: transparent;
+}
+
+#diskusiImagesCarousel .btn-remove-image:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.diskusi-image-input input {
+    border-radius: var(--border-radius-corner);
+    padding: 0 !important;
+    height: auto !important;
+    width: 100%;
+}
+
+.diskusi-image-input input::-webkit-file-upload-button {
+    content: "File";
+    background-color: var(--main-color);
+    color: white;
+    border: transparent;
+    padding: 5px;
+}
+
+.diskusi-image-input input::-webkit-file-upload-button:hover {
+    background-color: var(--main-color-hover) !important;
+}
+
+.diskusi-image-input p {
+    font-size: 13px;
+}
+
+#diskusiImagesCarousel .btn-add-image {
+    padding: 5px;
+}
