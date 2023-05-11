@@ -9,7 +9,6 @@ const DeleteDiscussionImageModal = ({ setImages, discussionId, discussionImageId
   const handleShow = () => setShow(true);
 
   const handleOnClickDeleteMatkul = async (event) => {
-    event.preventDefault();
     await deleteDiscussionImage(discussionImageId).then(async () => {
       handleClose();
       setImages(await getDiscussionImages(discussionId));

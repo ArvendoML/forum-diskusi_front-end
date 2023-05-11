@@ -35,3 +35,12 @@
     flex-direction: row;
     align-items: center;
 }
+
+.Toastify {
+    position: relative;
+    z-index: 1000000;
+}
+
+.modal {
+    z-index: 100000;
+}

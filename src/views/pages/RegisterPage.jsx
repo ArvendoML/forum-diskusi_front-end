@@ -63,7 +63,6 @@ const LoginPage = () => {
           <Input
             label={"Nama"}
             type={"text"}
-            name={"name"}
             placeholder={"ex: John Doe"}
             onChange={handleOnChangeName}
           />

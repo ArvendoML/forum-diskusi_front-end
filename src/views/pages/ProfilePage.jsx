@@ -5,6 +5,7 @@ import "../../styles/pages/profilePage.css";
 import fetchProfileImage from "../../scripts/fetchProfileImage";
 import { toast } from "react-toastify";
 import userProfileContext from "../../context/userProfile.context";
+import ChangePasswordModal from "../components/modal/ChangePasswordModal";
 
 const ProfilePage = ({ setUserProfileImage }) => {
   const { setUserProfile } = useContext(userProfileContext);
@@ -16,6 +17,11 @@ const ProfilePage = ({ setUserProfileImage }) => {
   const [email, setEmail] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
+
+  // Modal
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -107,7 +113,7 @@ const ProfilePage = ({ setUserProfileImage }) => {
           Cancel
         </button>
         <button type="submit" className="btn-edit" onClick={handleOnSubmit}>
-          Edit
+          Submit
         </button>
       </div>
     );
@@ -116,9 +122,14 @@ const ProfilePage = ({ setUserProfileImage }) => {
   let showEditModeBtn;
   if (editMode === false) {
     showEditModeBtn = (
-      <button className="btn-edit btn-show-edit" onClick={handleOnClickEditMode}>
-        Edit
-      </button>
+      <div className="profile-footer">
+        <button className="btn-edit btn-show-edit" type="button" onClick={handleOnClickEditMode}>
+          Edit
+        </button>
+        <button type="button" className="btn-change-pwd" onClick={handleShow}>
+          Ganti Password
+        </button>
+      </div>
     );
   }
 
@@ -174,6 +185,9 @@ const ProfilePage = ({ setUserProfileImage }) => {
         {showEditMode}
       </form>
       {showEditModeBtn}
+
+      {/* Modal */}
+      <ChangePasswordModal show={show} handleClose={handleClose} />
     </section>
   );
 };

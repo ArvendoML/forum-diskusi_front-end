@@ -117,9 +117,9 @@ const DiskusiModal = ({ show, handleClose, id_matkul, setDiscussionsList }) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn btn-secondary" onClick={handleOnClickCloseModal}>
+          <button className="btn btn-secondary" onClick={handleOnClickCloseModal}>
             Batal
-          </Button>
+          </button>
           <Button type="submit" className="btn-submit-discussion">
             Buat Diskusi
           </Button>

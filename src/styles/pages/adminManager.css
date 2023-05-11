@@ -74,7 +74,7 @@
 
 /* Modal */
 .modal-create-matkul {
-    z-index: 100000 !important;
+    z-index: 100000;
 }
 
 .form-create-matkul .modal-body {

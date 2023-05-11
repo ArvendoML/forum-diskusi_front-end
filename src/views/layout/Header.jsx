@@ -3,6 +3,7 @@ import "../../styles/layout/header.css";
 import HeaderDropdown from "../components/HeaderDropdown";
 import { getUserProfile } from "../../scripts/api/users";
 import fetchProfileImage from "../../scripts/fetchProfileImage";
+import avatar from "../../public/images/avatar.webp";
 
 const Header = ({ setUserAuth, userProfileImage }) => {
   const [username, setUsername] = useState();
@@ -37,7 +38,7 @@ const Header = ({ setUserAuth, userProfileImage }) => {
             {username} ({userNim})
           </p>
           <div className="header-avatar">
-            <img src={userImageUrl} alt={`${username} Avatar`} />
+            <img src={userImageUrl || avatar} alt={`${username} Avatar`} />
           </div>
         </div>
         <HeaderDropdown

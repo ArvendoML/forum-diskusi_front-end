@@ -124,6 +124,13 @@
     }
 }
 
+@media (max-width: 376px) {
+    .diskusi-card_header-image img {
+        height: 35px !important;
+        width: 35px !important;
+    }
+}
+
 @media (max-width: 321px) {
     #matkulDiskusiDetailPage {
         padding: 15px !important;

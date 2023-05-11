@@ -65,7 +65,7 @@
 }
 
 #profilePage input {
-    border:  1px solid #ced4da;
+    border: 1px solid #ced4da;
 }
 
 #profilePage .form-footer {
@@ -75,7 +75,8 @@
 }
 
 #profilePage .btn-edit,
-#profilePage .btn-cancel {
+#profilePage .btn-cancel,
+#profilePage .btn-change-pwd {
     border: none;
     border-radius: 5px;
     color: white;
@@ -84,8 +85,21 @@
     width: 100px;
 }
 
-#profilePage .btn-show-edit {
+#profilePage .profile-footer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
     margin-top: 25px;
+}
+
+#profilePage .btn-change-pwd {
+    width: auto;
+    background-color: #576CBC;
+    padding-inline: 10px;
+}
+
+#profilePage .btn-change-pwd:hover {
+    background-color: #677fdf;
 }
 
 #profilePage .btn-cancel {

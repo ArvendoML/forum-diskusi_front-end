@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getAccessToken } from "./auth";
 import { getOneMatkul } from "./matkuls";
+import { toast } from "react-toastify";
 
 // const BASE_URL = "http://localhost:8000/api/users";
 const BASE_URL = "https://forum-diskusiback-end-production.up.railway.app/api/users";
@@ -73,6 +74,31 @@ const updateUserProfile = async (user_name, user_nim, user_imageUrl) => {
   }
 };
 
+const updateUserPassword = async (user_newPassword) => {
+  try {
+    await axios
+      .put(
+        `${BASE_URL}/profile/update/password`,
+        {
+          user_newPassword: user_newPassword,
+        },
+        {
+          headers: {
+            Authorization: getAccessToken(),
+          },
+        }
+      )
+      .then(() => {
+        toast.success("Password berhasil diperbaharui!");
+      })
+      .catch(() => {
+        toast.error("Password gagal diperbaharui!");
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const userAddMatkul = async (id_matkul) => {
   try {
     let result;
@@ -123,4 +149,5 @@ export {
   userAddMatkul,
   userRemoveMatkul,
   updateUserProfile,
+  updateUserPassword,
 };
