@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAccessToken } from "./auth";
+import { getAccessToken, getDataFromToken } from "./auth";
 import { getUserProfile } from "./users";
 
 // const BASE_URL = "http://localhost:8000/api/discussions/comments";
@@ -118,7 +118,7 @@ const unlikeComment = async (id_discussion, id_comment) => {
 };
 
 const checkIfUserLikeComment = async (id) => {
-  const userId = (await getUserProfile()).id;
+  const userId = (getDataFromToken()).id;
   const user_like_comment = (await getOneComment(id)).comment_user_like || [];
 
   const findUser = user_like_comment.filter((user_id) => user_id === userId);

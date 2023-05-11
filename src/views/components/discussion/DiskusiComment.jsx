@@ -53,10 +53,7 @@ const DiskusiComment = ({
       const user = await getBasicUserInfo(id_user);
       setUserName(user.user_name);
       setUserImageUrl(user.user_imageUrl);
-
-      const userLike = await checkIfUserLikeComment(id);
-      setIsUserLike(userLike);
-
+      
       const userId = getDataFromToken();
       setUserId(userId.id);
 
@@ -91,7 +88,7 @@ const DiskusiComment = ({
       });
     };
     checkdislike();
-  }, [comment_user_like, comment_user_dislike, id_user, id]);
+  }, [comment_user_dislike, comment_user_like, id, id_user]);
 
   // Handle Like and Dislike Buttons
   const handleOnClickLike = async () => {

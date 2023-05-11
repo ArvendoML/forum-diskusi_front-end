@@ -30,18 +30,19 @@ import { getDataFromToken } from "../../scripts/api/auth";
 const MatkulDiskusiDetailPage = () => {
   const navigate = useNavigate();
   const { id_matkul, id_discussion } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [matkul, setMatkul] = useState(getOneMatkul(id_matkul));
-  const [discussion, setDiscussion] = useState(getOneDiscussion(id_discussion));
-  const [comments, setComments] = useState([]);
+  const [user, setUser] = useState(getDataFromToken());
+  const [userRoleId, setUserRoleId] = useState(getDataFromToken().role);
   const [userName, setUserName] = useState();
   const [userProfileImage, setUserProfileImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [matkul, setMatkul] = useState("");
+  const [discussion, setDiscussion] = useState("");
+  const [comments, setComments] = useState([]);
   const [commentValue, setCommentValue] = useState();
-  const [user, setUser] = useState(getDataFromToken());
-  const [editMode, setEditMode] = useState(false);
   const [discussionTitle, setDiscussionTitle] = useState();
   const [discussionDesc, setDiscussionDesc] = useState();
   const [discussionStatus, setDiscussionStatus] = useState();
+  const [editMode, setEditMode] = useState(false);
   const [show, setShow] = useState(false);
 
   // Modal
@@ -68,6 +69,7 @@ const MatkulDiskusiDetailPage = () => {
 
       const userData = getDataFromToken();
       setUser(userData);
+      setUserRoleId(userData.role);
 
       setIsLoading(false);
     };
@@ -130,9 +132,11 @@ const MatkulDiskusiDetailPage = () => {
           <DiskusiComment
             key={i}
             {...comment}
+            comment_user_like={comment.comment_user_like || []}
+            comment_user_dislike={comment.comment_user_dislike || []}
             setComments={setComments}
             id_matkul={id_matkul}
-            id_role={user.id_role}
+            id_role={userRoleId}
           />
         ))}
       </>
@@ -142,7 +146,7 @@ const MatkulDiskusiDetailPage = () => {
   // Check user to show action buttons
   let discussionOwner;
   const checkOwner = user.id === discussion.id_user;
-  const checkRole = user.id_role === 1;
+  const checkRole = userRoleId === 1;
   if (checkOwner || checkRole) {
     discussionOwner = (
       <>
@@ -283,6 +287,7 @@ const MatkulDiskusiDetailPage = () => {
         <textarea
           id="replyInput"
           placeholder="Balas disini..."
+          defaultValue={commentValue}
           onChange={handleOnChangeComment}
           required
         />
