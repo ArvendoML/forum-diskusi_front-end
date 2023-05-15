@@ -4,7 +4,7 @@ import { GoReply } from "react-icons/go";
 import DiskusiComment from "../components/discussion/DiskusiComment";
 import { getOneMatkul } from "../../scripts/api/matkuls";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBasicUserInfo } from "../../scripts/api/users";
+import { getBasicUserInfo, getUserProfile } from "../../scripts/api/users";
 import {
   deleteDiscussion,
   editDiscussion,
@@ -67,9 +67,9 @@ const MatkulDiskusiDetailPage = () => {
       setUserName(user.user_name);
       setUserProfileImage(user.user_imageUrl);
 
-      const userData = getDataFromToken();
+      const userData = await getUserProfile();
       setUser(userData);
-      setUserRoleId(userData.role);
+      setUserRoleId(userData.id_role);
 
       setIsLoading(false);
     };
@@ -283,7 +283,7 @@ const MatkulDiskusiDetailPage = () => {
 
       {/* Create New Comment */}
       <section className="diskusi-detail_comment-new">
-        <DiskusiCardHeaderNewComment user_name={userName} user_imageUrl={userProfileImage} />
+        <DiskusiCardHeaderNewComment user_name={user.user_name} user_imageUrl={user.user_imageUrl} />
         <textarea
           id="replyInput"
           placeholder="Balas disini..."
