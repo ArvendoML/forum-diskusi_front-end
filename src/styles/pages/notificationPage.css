@@ -1,0 +1,34 @@
+#notificationPage {
+    padding: 20px;
+}
+
+#notificationPage h1 {
+    font-size: 25px !important;
+    margin: 0;
+}
+
+.notificationPage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#notificationPage .pagination {
+    padding: 0;
+}
+
+#notificationPage .card-list {
+    gap: 25px;
+}
+
+.btn-delete-all-notifications {
+    background-color: rgb(202, 0, 0);
+    color: white;
+    padding: 5px;
+    border: transparent !important;
+    border-radius: var(--border-radius-corner);
+}
+
+.btn-delete-all-notifications:hover {
+    background-color: rgb(232, 0, 0) !important;
+}

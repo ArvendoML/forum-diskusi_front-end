@@ -123,3 +123,22 @@
 #matkulDiskusiDetailPage .diskusi-card_footer .btn-dislike-false:disabled:hover {
     color: inherit;
 }
+
+#replyInput {
+    width: 100%;
+    scroll-margin-top: 150px;
+}
+
+.btn-cancel-reply {
+    background-color: rgb(202, 0, 0) !important;
+    border-radius: var(--border-radius-corner);
+    border: transparent;
+    margin-top: 10px;
+    font-size: 17px;
+    width: fit-content !important;
+    padding-inline: 15px;
+}
+
+.btn-cancel-reply:hover {
+    background-color: rgb(232, 0, 0) !important;
+}

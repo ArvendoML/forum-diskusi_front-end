@@ -14,11 +14,13 @@ import {
   undislikeComment,
   unlikeComment,
 } from "../../../scripts/api/comments";
-import { BsFillTrashFill } from "react-icons/bs";
+import { BsArrowReturnRight, BsFillTrashFill } from "react-icons/bs";
 import DeleteModal from "../modal/DeleteModal";
 import { toast } from "react-toastify";
 import { getDataFromToken } from "../../../scripts/api/auth";
 import Skeleton from "react-loading-skeleton";
+import { GoReply } from "react-icons/go";
+import { createNotification } from "../../../scripts/api/notifications";
 
 const DiskusiComment = ({
   id,
@@ -26,14 +28,22 @@ const DiskusiComment = ({
   comment_description,
   comment_user_like,
   comment_user_dislike,
+  reply_from_user,
+  reply_from_comment_desc,
   id_user,
   createdAt,
   setComments,
   id_role,
+  setReplyStatus,
+  setCommentReplyUser,
+  setCommentReplyDesc,
+  setCommentReplyUserId,
+  id_matkul,
 }) => {
   const [userName, setUserName] = useState();
   const [userId, setUserId] = useState(getDataFromToken());
   const [commentDesc, setCommentDesc] = useState(comment_description);
+  const [commentDescEdited, setCommentDescEdited] = useState(comment_description);
   const [commentLikes, setCommentLikes] = useState(0);
   const [commentDislikes, setCommentDislikes] = useState(0);
   const [isUserLike, setIsUserLike] = useState();
@@ -50,10 +60,12 @@ const DiskusiComment = ({
   useEffect(() => {
     setIsLoading(true);
     const getData = async () => {
+      setCommentDesc(comment_description);
+
       const user = await getBasicUserInfo(id_user);
       setUserName(user.user_name);
       setUserImageUrl(user.user_imageUrl);
-      
+
       const userId = getDataFromToken();
       setUserId(userId.id);
 
@@ -88,13 +100,18 @@ const DiskusiComment = ({
       });
     };
     checkdislike();
-  }, [comment_user_dislike, comment_user_like, id, id_user]);
+  }, [comment_description, comment_user_dislike, comment_user_like, id, id_user]);
 
   // Handle Like and Dislike Buttons
   const handleOnClickLike = async () => {
-    await likeComment(id_discussion, id).then(() => {
+    await likeComment(id_discussion, id).then(async () => {
       setCommentLikes(commentLikes + 1);
       setIsUserLike(true);
+
+      const notificationComment = `@${userName} menyukai komentarmu! "${
+        commentDesc.length > 30 ? `${commentDesc.substring(0, 30)}...` : commentDesc
+      }"`;
+      await createNotification(notificationComment, id_user, id_matkul, id_discussion);
     });
   };
 
@@ -106,9 +123,14 @@ const DiskusiComment = ({
   };
 
   const handleOnClickDislike = async () => {
-    await dislikeComment(id_discussion, id).then(() => {
+    await dislikeComment(id_discussion, id).then(async () => {
       setCommentDislikes(commentDislikes + 1);
       setIsUserDislike(true);
+
+      const notificationComment = `@${userName} tidak menyukai komentarmu! "${
+        commentDesc.length > 30 ? `${commentDesc.substring(0, 30)}...` : commentDesc
+      }"`;
+      await createNotification(notificationComment, id_user, id_matkul, id_discussion);
     });
   };
 
@@ -129,11 +151,12 @@ const DiskusiComment = ({
   };
 
   const handleOnChangeEdit = async (event) => {
-    setCommentDesc(event.target.value);
+    setCommentDescEdited(event.target.value);
   };
 
   const handleOnClickEditSubmit = async () => {
-    await editComment(id_discussion, id, commentDesc).then(() => {
+    await editComment(id_discussion, id, commentDescEdited).then(async () => {
+      setComments(await getAllComments(id_discussion));
       setEditMode(false);
     });
   };
@@ -144,6 +167,14 @@ const DiskusiComment = ({
       setComments(await getAllComments(id_discussion));
       toast.success("Komentar berhasil dihapus!");
     });
+  };
+
+  // Handle Reply
+  const handleOnClickReply = () => {
+    setCommentReplyUser(userName);
+    setCommentReplyDesc(comment_description);
+    setCommentReplyUserId(id_user);
+    setReplyStatus(true);
   };
 
   let showAction;
@@ -178,6 +209,19 @@ const DiskusiComment = ({
               createdAt={createdAt}
             />
             <div className="diskusi-card_content">
+              {/* Reply From Comment */}
+              {reply_from_user !== null && (
+                <div className="reply-content">
+                  <p className="reply-content-header">Membalas Komentar:</p>
+                  <div className="reply-content-comment">
+                    <BsArrowReturnRight />
+                    <p>
+                      <strong>{`@${reply_from_user}`}</strong>
+                      {`: ${reply_from_comment_desc}`}
+                    </p>
+                  </div>
+                </div>
+              )}
               {editMode === true ? (
                 <>
                   <textarea
@@ -247,6 +291,16 @@ const DiskusiComment = ({
                   </button>
                 )}
                 <p>{commentDislikes}</p>
+              </div>
+              <div className="diskusi-card_icon-group">
+                <a
+                  href="#replyInput"
+                  className="diskusi-card_icon-group btn-reply"
+                  onClick={handleOnClickReply}
+                >
+                  <GoReply />
+                  <p>Balas</p>
+                </a>
               </div>
               {showAction}
             </div>

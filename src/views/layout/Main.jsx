@@ -13,11 +13,14 @@ import { useEffect } from "react";
 import { UserProfileProvider } from "../../context/userProfile.context";
 import AdminManager from "../pages/AdminManager";
 import { getUserProfile } from "../../scripts/api/users";
+import NotificationPage from "../pages/NotificationPage";
+import { getUserNotifications } from "../../scripts/api/notifications";
 
 const Main = ({ setUserAuth }) => {
   const [userProfile, setUserProfile] = useState();
   const [userProfileImage, setUserProfileImage] = useState();
   const [userRole, setUserRole] = useState();
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -25,6 +28,9 @@ const Main = ({ setUserAuth }) => {
       setUserRole(profile.id_role);
       setUserProfile(profile);
       setUserProfileImage(profile.user_imageUrl);
+
+      const notifications = await getUserNotifications(profile.id);
+      setNotifications(notifications);
     };
     getData();
   }, []);
@@ -32,7 +38,12 @@ const Main = ({ setUserAuth }) => {
   return (
     <UserProfileProvider value={{ userProfile, setUserProfile }}>
       <main>
-        <Header setUserAuth={setUserAuth} userProfileImage={userProfileImage} />
+        <Header
+          setUserAuth={setUserAuth}
+          userProfileImage={userProfileImage}
+          setNotifications={setNotifications}
+          notifications={notifications}
+        />
         <section id="mainContent">
           <Aside userRole={userRole} />
           <Routes>
@@ -44,6 +55,15 @@ const Main = ({ setUserAuth }) => {
               element={<MatkulDiskusiDetailPage />}
             />
             <Route path="/admin-manager" element={<AdminManager />} />
+            <Route
+              path="/notification"
+              element={
+                <NotificationPage
+                  notifications={notifications}
+                  setNotifications={setNotifications}
+                />
+              }
+            />
             <Route
               path="/profile"
               element={<ProfilePage setUserProfileImage={setUserProfileImage} />}

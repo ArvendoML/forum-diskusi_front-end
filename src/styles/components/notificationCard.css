@@ -1,0 +1,41 @@
+.notification-card {
+    border: transparent !important;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.notification-card .card-body p,
+.notification-card .card-title.h5 {
+    font-size: 20px !important;
+    margin: 0;
+}
+
+.notification-card .card-title a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--main-color-hover);
+}
+
+.notification-card .card-title a:hover {
+    color: var(--main-color);
+}
+
+.notification-card .card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-card .card-header button {
+    background-color: rgb(202, 0, 0);
+    color: white;
+    padding: 5px;
+    border: transparent !important;
+    border-radius: 50%;
+}
+
+.notification-card .card-header button:hover {
+    background-color: rgb(232, 0, 0) !important;
+}

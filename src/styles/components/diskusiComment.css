@@ -26,3 +26,23 @@
     background-color: lightgray;
 
 }
+
+.reply-content {
+    background-color: #5587b4ae;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.reply-content p,
+.reply-content strong {
+    font-size: 15px;
+}
+
+.reply-content-header{
+    font-size: 18px !important;
+}
+
+.reply-content-comment {
+    display: flex;
+    gap: 5px;
+}

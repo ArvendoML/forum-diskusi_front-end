@@ -6,11 +6,15 @@ import umnImage from "../../public/images/umn-image.webp";
 import { userLogin } from "../../scripts/api/auth";
 import { toast } from "react-toastify";
 import umnLogo from "../../public/images/logo-umn.webp";
+import { Modal } from "react-bootstrap";
 
 const LoginPage = ({ setUserAuth }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [show, setShow] = useState(true);
+
+  const handleClose = () => setShow(false);
 
   const handleOnChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -68,6 +72,36 @@ const LoginPage = ({ setUserAuth }) => {
           </div>
         </form>
       </section>
+
+      <Modal
+        show={show}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        backdrop="static"
+        className="case-of-conduct"
+        centered
+      >
+        <Modal.Header>
+          <Modal.Title>Peraturan Website!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ol>
+            <li>
+              Pengguna diperkenankan untuk membuat diskusi baru hanya untuk membahas mengenai mata
+              kuliah dan tidak untuk kepentingan lainnya!
+            </li>
+            <li>Pengguna dilarang untuk memberikan jawaban atau contekan dalam jenis apa pun!</li>
+            <li>
+              Pengguna dilarang untuk posting apa pun yang bersifat pornografi, rasis, ataupun
+              yang tidak berhubungan dengan mata kuliah di Universitas Multimedia Nusantara!
+            </li>
+            <li> Pengguna wajib untuk saling menghormati antara satu sama yang lain!</li>
+          </ol>
+          <button onClick={handleClose} className="btn-case-of-conduct">
+            Saya mengerti dan akan mematuhinya
+          </button>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 };

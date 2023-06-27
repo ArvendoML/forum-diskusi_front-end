@@ -38,3 +38,27 @@
     width: 100%;
     border-radius: 50%;
 }
+
+.btn-notification {
+    margin-left: 10px;
+    position: relative;
+}
+
+.btn-notification:hover {
+    color: yellow;
+}
+
+.btn-notification::before {
+    content: attr(notification-count);
+    position: absolute;
+    top: -0.5em;
+    right: -0.5em;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: red;
+    color: white
+}

@@ -10,7 +10,7 @@ const getAllComments = async (id) => {
   try {
     const commentList = await axios.get(`${BASE_URL}/${id}`);
 
-    return commentList.data.data;
+    return commentList.data.data.reverse();
   } catch (error) {
     console.log(error);
   }
@@ -28,12 +28,19 @@ const getOneComment = async (id) => {
 };
 
 // Create Comment
-const createComment = async (id_discussion, comment_description) => {
+const createComment = async (
+  id_discussion,
+  comment_description,
+  reply_from_user,
+  reply_from_comment_desc
+) => {
   try {
     await axios.post(
       `${BASE_URL}/${id_discussion}/create`,
       {
         comment_description: comment_description,
+        reply_from_user: reply_from_user || null,
+        reply_from_comment_desc: reply_from_comment_desc || null,
       },
       {
         headers: {
@@ -118,7 +125,7 @@ const unlikeComment = async (id_discussion, id_comment) => {
 };
 
 const checkIfUserLikeComment = async (id) => {
-  const userId = (getDataFromToken()).id;
+  const userId = getDataFromToken().id;
   const user_like_comment = (await getOneComment(id)).comment_user_like || [];
 
   const findUser = user_like_comment.filter((user_id) => user_id === userId);

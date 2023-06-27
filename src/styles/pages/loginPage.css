@@ -31,3 +31,19 @@
 .loginPage_right-logo img {
     max-width: 200px;
 }
+
+.case-of-conduct ol {
+    padding: 0;
+    padding-inline: 20px;
+}
+
+.btn-case-of-conduct {
+    width: 100%;
+    border: transparent !important;
+    background-color: rgb(202, 0, 0);
+    color: white;
+}
+
+.btn-case-of-conduct:hover {
+    background-color: rgb(232, 0, 0) !important;
+}

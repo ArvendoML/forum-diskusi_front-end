@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BsFillChatDotsFill, BsFillTrashFill } from "react-icons/bs";
+import { BsArrowReturnRight, BsFillChatDotsFill, BsFillTrashFill } from "react-icons/bs";
 import { GoReply } from "react-icons/go";
 import DiskusiComment from "../components/discussion/DiskusiComment";
 import { getOneMatkul } from "../../scripts/api/matkuls";
@@ -26,6 +26,7 @@ import {
 import DiskusiImages from "../components/discussion/DiskusiImages";
 import EditDiskusiImages from "../components/discussion/EditDiskusiImages";
 import { getDataFromToken } from "../../scripts/api/auth";
+import { createNotification } from "../../scripts/api/notifications";
 
 const MatkulDiskusiDetailPage = () => {
   const navigate = useNavigate();
@@ -38,12 +39,18 @@ const MatkulDiskusiDetailPage = () => {
   const [matkul, setMatkul] = useState("");
   const [discussion, setDiscussion] = useState("");
   const [comments, setComments] = useState([]);
-  const [commentValue, setCommentValue] = useState();
+  const [commentValue, setCommentValue] = useState(null);
   const [discussionTitle, setDiscussionTitle] = useState();
   const [discussionDesc, setDiscussionDesc] = useState();
   const [discussionStatus, setDiscussionStatus] = useState();
   const [editMode, setEditMode] = useState(false);
   const [show, setShow] = useState(false);
+
+  // Reply
+  const [commentReplyUserId, setCommentReplyUserId] = useState(null);
+  const [commentReplyUser, setCommentReplyUser] = useState(null);
+  const [commentReplyDesc, setCommentReplyDesc] = useState(null);
+  const [replyStatus, setReplyStatus] = useState(false);
 
   // Modal
   const handleClose = () => setShow(false);
@@ -87,10 +94,50 @@ const MatkulDiskusiDetailPage = () => {
   };
 
   const handleOnClickCommentSubmit = async () => {
-    await createComment(id_discussion, commentValue).then(async () => {
-      const comments = await getAllComments(id_discussion);
-      setComments(comments);
-    });
+    await createComment(id_discussion, commentValue, commentReplyUser, commentReplyDesc).then(
+      async () => {
+        const comments = await getAllComments(id_discussion);
+        setComments(comments);
+
+        if (commentReplyUser !== null) {
+          const notificationComment = `@${userName} membalas "${
+            commentValue.length > 30 ? `${commentValue.substring(0, 30)}...` : commentValue
+          }" pada komentarmu! ("${
+            commentReplyDesc.length > 30
+              ? `${commentReplyDesc.substring(0, 30)}...`
+              : commentReplyDesc
+          }")`;
+          await createNotification(
+            notificationComment,
+            commentReplyUserId,
+            id_matkul,
+            id_discussion
+          );
+        } else {
+          const notificationComment = `@${userName} membalas "${
+            commentValue.length > 30 ? `${commentValue.substring(0, 30)}...` : commentValue
+          }" di diskusimu!`;
+          await createNotification(
+            notificationComment,
+            discussion.id_user,
+            id_matkul,
+            id_discussion
+          );
+        }
+      }
+    );
+
+    setReplyStatus(false);
+    setCommentReplyUser(null);
+    setCommentReplyUser(null);
+    setCommentReplyUserId(null);
+  };
+
+  const handleOnClickCancelReply = () => {
+    setReplyStatus(false);
+    setCommentReplyUser(null);
+    setCommentReplyUser(null);
+    setCommentReplyUserId(null);
   };
 
   const handleOnClickDeleteDiscussion = async () => {
@@ -132,6 +179,10 @@ const MatkulDiskusiDetailPage = () => {
           <DiskusiComment
             key={i}
             {...comment}
+            setReplyStatus={setReplyStatus}
+            setCommentReplyUser={setCommentReplyUser}
+            setCommentReplyDesc={setCommentReplyDesc}
+            setCommentReplyUserId={setCommentReplyUserId}
             comment_user_like={comment.comment_user_like || []}
             comment_user_dislike={comment.comment_user_dislike || []}
             setComments={setComments}
@@ -257,8 +308,10 @@ const MatkulDiskusiDetailPage = () => {
             </div>
             <div className="diskusi-card_footer">
               <div className="diskusi-card_icon-group">
-                <BsFillChatDotsFill />
-                <p>{comments.length} Pembahasan</p>
+                <a href="#commentList" className="diskusi-card_icon-group btn-reply">
+                  <BsFillChatDotsFill />
+                  <p>{comments.length} Pembahasan</p>
+                </a>
               </div>
               <div>
                 <a href="#replyInput" className="diskusi-card_icon-group btn-reply">
@@ -283,14 +336,37 @@ const MatkulDiskusiDetailPage = () => {
 
       {/* Create New Comment */}
       <section className="diskusi-detail_comment-new">
-        <DiskusiCardHeaderNewComment user_name={user.user_name} user_imageUrl={user.user_imageUrl} />
-        <textarea
-          id="replyInput"
-          placeholder="Balas disini..."
-          defaultValue={commentValue}
-          onChange={handleOnChangeComment}
-          required
+        <DiskusiCardHeaderNewComment
+          user_name={user.user_name}
+          user_imageUrl={user.user_imageUrl}
         />
+
+        {replyStatus === true && (
+          <div className="reply-content">
+            <p className="reply-content-header">Membalas Komentar:</p>
+            <div className="reply-content-comment">
+              <BsArrowReturnRight />
+              <p>
+                <strong>{`@${commentReplyUser}`}</strong>
+                {`: ${commentReplyDesc}`}
+              </p>
+            </div>
+            <button className="btn-cancel-reply" onClick={handleOnClickCancelReply}>
+              Batal
+            </button>
+          </div>
+        )}
+
+        <div id="replyInput">
+          <textarea
+            id="replyInput"
+            placeholder="Balas disini..."
+            defaultValue={commentValue}
+            onChange={handleOnChangeComment}
+            required
+          />
+        </div>
+
         <div className="diskusi-detail_comment-new-btn">
           <button
             className="btn"
@@ -307,7 +383,7 @@ const MatkulDiskusiDetailPage = () => {
       </section>
 
       {/* Show Comment */}
-      <section className="diskusi-detail_comment-list">
+      <section id="commentList" className="diskusi-detail_comment-list">
         <hr />
         {comments.length !== 0 ? (
           <Paginate
